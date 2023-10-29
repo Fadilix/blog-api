@@ -11,6 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routes //
+
+app.get("/", (req, res) => {
+    res.json({ greeting: "Hello, world!!!" })
+})
 // For the user
 app.post("/users", userController.createUser);
 app.get("/users", userController.getUsers);
