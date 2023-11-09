@@ -28,7 +28,7 @@ const deletePost = async (req, res) => {
         res.status(200).json({ result: "User deleted successfully" });
     } catch (error) {
         console.error("Error deleting user", error);
-        res.status(500).json({ error: "Internal Server Error" })
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -37,10 +37,10 @@ const getPosts = async (req, res) => {
     try {
         const result = await pool.query(query);
         const allPosts = result.rows
-        res.status(200).json({ result: allPosts })
+        res.status(200).json({ result: allPosts });
     } catch (error) {
         console.error("Error fetching data", error);
-        res.status(500).json({ error: "Internal Server Error" })
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 

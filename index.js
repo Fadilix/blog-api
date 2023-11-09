@@ -14,12 +14,13 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
     res.json({ greeting: "Hello, world!!!" })
-})
+}) 
 // For the user
 app.post("/users", userController.createUser);
 app.get("/users", userController.getUsers);
 app.delete("/user/:id", userController.deleteUser);
 app.put("/user/:id", userController.editUser)
+app.post("/login", userController.login);
 
 // For the post
 app.post("/createpost", postController.createPost);

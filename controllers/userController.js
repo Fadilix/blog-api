@@ -79,9 +79,33 @@ const editUser = async (req, res) => {
     }
 }
 
+
+const login = async (req, res) => {
+    const { username, password } = req.body;
+    const query = "SELECT * FROM users WHERE name = $1"
+    const checkUser = await pool.query(query, [username]);
+    if (checkUser.rows.length > 0) {
+        const storedHashedPassword = checkUser.rows[0].password; // Assuming your password field is named 'password' in the database
+
+        // Compare the entered password with the stored hashed password
+        const passwordsMatch = await bcrypt.compare(password, storedHashedPassword);
+
+        if (passwordsMatch) {
+            // Passwords match, authentication successful
+            res.json("Login successful");
+        } else {
+            // Passwords do not match, authentication failed
+            res.json("Invalid password");
+        }
+    } else {
+        res.json("user not found");
+    }
+}
+
 module.exports = {
     createUser,
     getUsers,
     deleteUser,
     editUser,
+    login
 }
